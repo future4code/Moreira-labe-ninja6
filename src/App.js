@@ -5,7 +5,7 @@ import { AddToCart } from "./components/AddToCart";
 function App() {
 	return (
 		<div>
-        <AppContainer />
+//         <AppContainer />
 	<AddToCart />
 		</div>
 	)
