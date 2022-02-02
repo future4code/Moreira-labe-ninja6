@@ -4,8 +4,10 @@ import { AddToCart } from "./components/AddToCart";
 
 function App() {
 	return (
+		<div>
         <AppContainer />
 	<AddToCart />
+		</div>
 	)
 }
 
