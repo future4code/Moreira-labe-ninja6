@@ -118,10 +118,10 @@ export class AddToCart extends React.Component {
       );
     });
     const carrinho = this.state.produtosNoCarrinho.find((produto) => {
-      <Carrinho key={produto.id}>
+      return (<Carrinho key={produto.id}>
         <p>{produto.title}</p>
         <p>{produto.price}</p>
-      </Carrinho>;
+      </Carrinho>)
     });
     // console.log(this.state.produtosNoCarrinho);
     return (
