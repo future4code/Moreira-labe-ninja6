@@ -4,6 +4,7 @@ import { AppContainer } from './components/AppContainer'
 function App() {
 	return (
         <AppContainer />
+	<AddToCart />
 	)
 }
 
