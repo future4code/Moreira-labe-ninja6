@@ -117,7 +117,7 @@ export class AddToCart extends React.Component {
         </div>
       );
     });
-    const carrinho = this.state.produtosNoCarrinho.find((produto) => {
+    const carrinho = this.state.produtosNoCarrinho.map((produto) => {
       return (<Carrinho key={produto.id}>
         <p>{produto.title}</p>
         <p>{produto.price}</p>
