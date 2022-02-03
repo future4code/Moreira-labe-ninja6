@@ -1,27 +1,31 @@
-// import React from 'react'
-// import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
-// const ItemContainer = styled.div`
-// display: grid;
-// grid-auto-flow: column;
-// gap: 4px;
-// align-Items: center; 
+const ItemContainer = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+  gap: 4px;
+  align-items: center;
 
-// p {
-//     margin:0;
-// }
-// `
+  p {
+    margin: 0;
+  }
+`;
 
-// export class ShoppingCartItem extends React.Component {
-//   render() {
-//     return <ItemContainer>
-//         <p>{this.props.cartItem.quantity}x</p>
-//         <p>{this.props.cartItem.name}</p>
-//         <button 
-//             onClick={() => this.props.onRemoveProductFromCart (this.props.cartItem.id)}
-//         >
-//             Remover
-//             </button>
-//       </ItemContainer>    
-//   }
-// }
+export class ShoppingCartItem extends React.Component {
+  render() {
+    const produto = this.props.produtosNoCarrinho.map((item) => {
+      return (
+        <div>
+          <p>{item.title}</p>
+          <p>{item.price}</p>
+          <button onClick={() => this.props.deleteServico(item.id)}>
+            Remover
+          </button>
+        </div>
+      );
+    });
+
+    return <ItemContainer>{produto}</ItemContainer>;
+  }
+}

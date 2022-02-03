@@ -1,14 +1,11 @@
-import React from 'react'
-import { AppContainer } from './components/AppContainer'
-import { AddToCart } from "./components/AddToCart";
-
+import React from "react";
+import Cards from "./components/Cards/Cards";
 function App() {
-	return (
-		<div>
-{/* //         <AppContainer /> */}
-	<AddToCart />
-		</div>
-	)
+  return (
+    <div>
+      <Cards />
+    </div>
+  );
 }
 
-export default App
+export default App;
