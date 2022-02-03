@@ -23,9 +23,9 @@ export default class CadastrarProdutos extends React.Component {
         dueDate: verCalendario(),
     }
 
-    componentDidMount() {
-        this.getAllCodeTeste();
-    }
+//     componentDidMount() {
+//         this.getAllCodeTeste();
+//     }
 
     //TARGETS
     onTexto = (e) => {
@@ -45,9 +45,9 @@ export default class CadastrarProdutos extends React.Component {
         this.setState({ dueDate: e.target.value })
     }
 
-    componentDidMount() {
-        this.getAllCodeTeste();
-    }
+//     componentDidMount() {
+//         this.getAllCodeTeste();
+//     }
 
     //Cadastrar Produtos() => 
     cadastroProduto = () => {
@@ -74,26 +74,26 @@ export default class CadastrarProdutos extends React.Component {
             })
     }
 
-    getAllCodeTeste = () => {
-        axios.get(UrlJobs, Autorizacao)
-            .then((res) => {
-                this.setState({ cadastros: res.data.jobs })
-                console.log('imprirmir', res.data.jobs);
-            })
-            .catch((err) => {
-                console.log('seu erro é', err);
-            })
-    }
+//     getAllCodeTeste = () => {
+//         axios.get(UrlJobs, Autorizacao)
+//             .then((res) => {
+//                 this.setState({ cadastros: res.data.jobs })
+//                 console.log('imprirmir', res.data.jobs);
+//             })
+//             .catch((err) => {
+//                 console.log('seu erro é', err);
+//             })
+//     }
 
     render() {
-        const imprimir = this.state.cadastros.map((produto) => {
-            return (
-                <div key={produto.id}>
-                    <h1>{produto.title}</h1>
-                    <h3>{produto.description}</h3>
-                </div>
-            )
-        })
+//         const imprimir = this.state.cadastros.map((produto) => {
+//             return (
+//                 <div key={produto.id}>
+//                     <h1>{produto.title}</h1>
+//                     <h3>{produto.description}</h3>
+//                 </div>
+//             )
+//         })
 
         return (
             <div>
@@ -131,9 +131,9 @@ export default class CadastrarProdutos extends React.Component {
                 ></TextField>
 
                 <button onClick={this.cadastroProduto}>Cadastrar Produto</button>
-                <div>
-                    {imprimir}
-                </div>
+//                 <div>
+//                     {imprimir}
+//                 </div>
             </div >
         )
     }
