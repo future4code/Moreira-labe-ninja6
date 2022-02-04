@@ -3,6 +3,8 @@ import styled from "styled-components";
 // import Cart from "../../img-matheus/cart.png";
 import axios from "axios";
 import { Carrinho } from "../Carrinho";
+
+
 const Main = styled.div`
   background-color: rgb(230, 230, 250);
 `;
@@ -68,6 +70,7 @@ export default class Cards extends React.Component {
     order: "",
     jobs: [],
     produtosNoCarrinho: [],
+    vendoCarrinho: false,
   };
 
   componentDidMount = () => {
@@ -128,13 +131,32 @@ export default class Cards extends React.Component {
         // console.log(err.response.data); //ver o console com o erro todo
       });
   };
+
+
   deleteServico = (idServico) => {
-    const servicos = this.state.produtosNoCarrinho.find(
-      (servico) => idServico === servico.id
+    const indiceServico = this.state.produtosNoCarrinho.findIndex(
+      servico => idServico === servico.id
     );
-    const novaListaCarrinho = this.state.produtosNoCarrinho.splice(servicos, 1);
+    const novaListaCarrinho = [...this.state.produtosNoCarrinho]
+    novaListaCarrinho.splice(indiceServico, 1);
     this.setState({ produtosNoCarrinho: novaListaCarrinho });
   };
+
+  verCarrinho = () => {
+      this.setState({vendoCarrinho: true})
+  }
+  esconderCarrinho = () => {
+    this.setState({vendoCarrinho: false})
+}
+
+
+limparArrayServico = () => {
+  this.setState({
+    produtosNoCarrinho: [],
+  });
+  alert(`Obrigada por contratar ninjas!${"\u2728"}`);
+};
+
   render() {
     const serviços = this.state.jobs
       .filter((job) => {
@@ -182,47 +204,61 @@ export default class Cards extends React.Component {
         );
       });
 
-    return (
-      <Main>
-        <DivOrder>
-          <input
-            placeholder="Pesquisar"
-            type="text"
-            onChange={this.OnChangeSearch}
-            value={this.state.search}
-          />
-          <input
-            placeholder="Preço Mínimo"
-            type="number"
-            onChange={this.OnChangeMinPrice}
-            value={this.state.minPrice}
-          />
-          <input
-            placeholder="Preço Máximo"
-            type="number"
-            onChange={this.OnChangeMaxPrice}
-          />
-          <div>
-            <label htmlFor="sort">Classificar por: </label>
-            <select
-              name="sort"
-              value={this.state.order}
-              onChange={this.OnChangeOrder}
-            >
-              <option value="name"> Título </option>
-              <option value="cres"> Preço Crescente</option>
-              <option value="decres"> Preço Decrescente</option>
-              <option value="date"> Prazo </option>
-            </select>
-          </div>
-        </DivOrder>
-        <DivCards>{serviços}</DivCards>
+      const visualizaCarrinho = () => {
+          if(this.state.vendoCarrinho){
+              return  <Carrinho
+              esconderCarrinho = {this.esconderCarrinho}
+              produtosNoCarrinho={this.state.produtosNoCarrinho}
+              deleteServico={this.deleteServico}
+              limparArrayServico={this.limparArrayServico}
+            />
+          } else {
+              return <Main>
+              <DivOrder>
+                <input
+                  placeholder="Pesquisar"
+                  type="text"
+                  onChange={this.OnChangeSearch}
+                  value={this.state.search}
+                />
+                <input
+                  placeholder="Preço Mínimo"
+                  type="number"
+                  onChange={this.OnChangeMinPrice}
+                  value={this.state.minPrice}
+                />
+                <input
+                  placeholder="Preço Máximo"
+                  type="number"
+                  onChange={this.OnChangeMaxPrice}
+                />
+            <div>
+                  <label htmlFor="sort">Classificar por: </label>
+                  <select
+                    name="sort"
+                    value={this.state.order}
+                    onChange={this.OnChangeOrder}
+                  >
+                    <option value="name"> Título </option>
+                    <option value="cres"> Preço Crescente</option>
+                    <option value="decres"> Preço Decrescente</option>
+                    <option value="date"> Prazo </option>
+                  </select>   
+            </div>
+                  <button onClick={this.verCarrinho}>Ver Carrinho</button>
+              </DivOrder>
+              <DivCards>{serviços}</DivCards>
+            </Main>
+          }
+      }
 
-        <Carrinho
-          produtosNoCarrinho={this.state.produtosNoCarrinho}
-          deleteServico={this.deleteServico}
-        />
-      </Main>
+    return (
+
+    <Main>
+        <button onClick = {this.props.voltarTelaInicial}>Voltar para Tela Inicial</button>
+        {visualizaCarrinho()}
+        
+    </Main>
     );
   }
 }

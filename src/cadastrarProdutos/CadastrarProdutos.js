@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Autorizacao, UrlJobs } from "./Geral";
-import { MenuItem, Select, TextField } from "@mui/material";
+import { MenuItem, Select, TextField } from '@material-ui/core';
 
 //Peguei da net
 const verCalendario = () => {
@@ -97,6 +97,7 @@ export default class CadastrarProdutos extends React.Component {
 
         return (
             <div>
+                <button onClick = {this.props.voltarTelaInicial}>Voltar para Tela Inicial</button>
                 <h1> Hello World</h1>
                 <input value={this.state.title} onChange={this.onTexto} placeholder="Nome do produto"></input>
                 <input value={this.state.description} onChange={this.onDescricao} placeholder="Sobre do produto"></input>
@@ -131,9 +132,9 @@ export default class CadastrarProdutos extends React.Component {
                 ></TextField>
 
                 <button onClick={this.cadastroProduto}>Cadastrar Produto</button>
-//                 <div>
-//                     {imprimir}
-//                 </div>
+                 {/* <div>
+                     {imprimir}
+                 </div> */}
             </div >
         )
     }
