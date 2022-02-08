@@ -189,7 +189,7 @@ limparArrayServico = () => {
             <h4>{job.title}</h4> <p> Prazo: {converterData(job.dueDate)}</p>
             <h4>R$ {job.price.toFixed(2)}</h4>
             <DivButton>
-              <button>Ver Detalhes</button>
+              <button onClick={() => this.props.vizualizarDetalhes(job.id)}>Ver Detalhes </button>
 
               <button
                 onClick={() => {
