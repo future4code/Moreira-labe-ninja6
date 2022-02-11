@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-// import Cart from "../../img-matheus/cart.png";
 import axios from "axios";
 import { Carrinho } from "../Carrinho";
+import cart from "../../img-matheus/cart.png"
 
 
 const Main = styled.div`
-  background-color: rgb(230, 230, 250);
+  background-color: aliceblue;
+  overflow-y: hidden;
 `;
 
 const Cards1 = styled.div`
@@ -20,8 +21,9 @@ const Cards1 = styled.div`
   padding: 10px;
   border-radius: 15px;
   text-align: center;
-  background-color: mediumorchid;
+  background-color: /* #1f57c5 */ royalblue;
   margin: 20px;
+  color: white;
 `;
 
 const DivCards = styled.div`
@@ -30,10 +32,82 @@ const DivCards = styled.div`
   margin: 30px;
 `;
 
-const Img = styled.img`
-  width: 18px;
-  height: 18px;
-`;
+const Inputs = styled.input`
+  border-radius: 10px;
+  margin-left: 20px;
+  border: 1px solid lightgray;
+  font-size: 15px;
+  padding: 8px;;
+  font-weight: bold;
+
+  :focus {
+    box-shadow: 0 0 0 0;
+    border: 1px solid lightgray;
+    outline: 0;
+} 
+`
+const Button = styled.button`
+  border-radius: 10px;
+  border: 0px;
+  background-color: #191970;
+  color: white;
+  font-weight: 550;
+  font-size: 12px;
+  padding: 5px;
+
+  :hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: all 0.5s ease 0s;
+    background-color: white;
+    color: #191970;
+  }
+`
+
+const ButtonCarrinho = styled.button`
+  border-radius: 10px;
+  border: 0px;
+  background-color: #191970;
+  color: white;
+  font-weight: 550;
+  font-size: 15px;
+  padding: 8px;
+
+  :hover{
+    cursor: pointer;
+    transform: scale(1.08);
+    transition: all 0.4s ease 0s;
+    background-color: white;
+    color: #191970;
+    border: 2px solid #191970;
+  }
+`
+
+const ButtonCar = styled.button`
+  background-color: transparent;
+  border: 0px ;
+  border-radius: 10px;
+
+  :hover{
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: all 0.5s ease 0s;
+  }
+`
+
+const Select = styled.select`
+  border-radius: 10px;
+  margin-left: 20px;
+  border: 1px solid lightgray;
+  font-size: 15px;
+  padding: 8px;
+
+  :focus {
+    box-shadow: 0 0 0 0;
+    border: 1px solid lightgray;
+    outline: 0;
+} 
+`
 
 const DivOrder = styled.div`
   padding: 50px 200px 50px 200px;
@@ -48,6 +122,13 @@ const DivButton = styled.div`
   justify-content: space-between;
   margin: 0px 15px 0px 15px;
 `;
+
+const Img = styled.img`
+  height: 28px;
+  width: 28px;
+  border: 0px;
+  
+`
 
 const converterData = (date) => {
   const day = date.substring(8, 10);
@@ -186,19 +267,20 @@ limparArrayServico = () => {
       .map((job) => {
         return (
           <Cards1 key={job.id}>
+  
             <h4>{job.title}</h4> <p> Prazo: {converterData(job.dueDate)}</p>
             <h4>R$ {job.price.toFixed(2)}</h4>
             <DivButton>
-              <button onClick={() => this.props.vizualizarDetalhes(job.id)}>Ver Detalhes </button>
+              <Button onClick={() => this.props.vizualizarDetalhes(job.id)}>Ver Detalhes </Button>
 
-              <button
+              <ButtonCar
                 onClick={() => {
                   this.adicionarProdutoCarrinho(job.id);
                   this.jobTaken(job.id);
                 }}
               >
-                Add {/* <Img src={Cart} /> */}
-              </button>
+                 <Img src={cart} />
+              </ButtonCar>
             </DivButton>
           </Cards1>
         );
@@ -215,26 +297,26 @@ limparArrayServico = () => {
           } else {
               return <Main>
               <DivOrder>
-                <input
+                <Inputs
                   placeholder="Pesquisar"
                   type="text"
                   onChange={this.OnChangeSearch}
                   value={this.state.search}
                 />
-                <input
+                <Inputs
                   placeholder="Preço Mínimo"
                   type="number"
                   onChange={this.OnChangeMinPrice}
                   value={this.state.minPrice}
                 />
-                <input
+                <Inputs
                   placeholder="Preço Máximo"
                   type="number"
                   onChange={this.OnChangeMaxPrice}
                 />
             <div>
                   <label htmlFor="sort">Classificar por: </label>
-                  <select
+                  <Select
                     name="sort"
                     value={this.state.order}
                     onChange={this.OnChangeOrder}
@@ -243,9 +325,9 @@ limparArrayServico = () => {
                     <option value="cres"> Preço Crescente</option>
                     <option value="decres"> Preço Decrescente</option>
                     <option value="date"> Prazo </option>
-                  </select>   
+                  </Select>   
             </div>
-                  <button onClick={this.verCarrinho}>Ver Carrinho</button>
+                  <ButtonCarrinho onClick={this.verCarrinho}>Ver Carrinho</ButtonCarrinho>
               </DivOrder>
               <DivCards>{serviços}</DivCards>
             </Main>
