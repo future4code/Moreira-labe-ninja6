@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import Cards from './components/Cards/Cards'
+import DetailsCards from './components/DetailsCards/DetailsCards'
 
 ReactDOM.render(
   <React.StrictMode>
